@@ -1,20 +1,18 @@
 package com.example.loginandsignup
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import org.json.JSONException
 import org.json.JSONObject
-import org.w3c.dom.Text
+
 
 class RegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,14 +33,26 @@ class RegisterActivity : AppCompatActivity() {
             val stringRequest: StringRequest = object : StringRequest(
                 Request.Method.POST, url,
                 Response.Listener { response ->
-                    text.text = "Response is: ${response.substring(0, 5)}"
-//                    Toast.makeText(this, response, Toast.LENGTH_LONG).show()
-                    val bundle = Bundle()
+//                    text.text = "${response.substring(0, 5)}"
 
-                    bundle.putString("anushka", text.getText().toString())
-                    intent = Intent(this, displaytoken::class.java)
-                    intent.putExtras(bundle)
-                    startActivity(intent)
+                    val jsonObject = JSONObject(response)
+                    val token = jsonObject.getString("access_token")
+                    val sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE)
+                    val myEdit = sharedPreferences.edit()
+                    myEdit.putString("access-token", token)
+                    myEdit.apply()
+                    myEdit.commit()
+                    val sharedTokenValue = sharedPreferences.getString("access-token",token)
+                    Toast.makeText(this,sharedTokenValue , Toast.LENGTH_LONG).show()
+
+//                    text.text=token
+//                    Toast.makeText(this, response, Toast.LENGTH_LONG).show()
+//                    val bundle = Bundle()
+//
+//                    bundle.putString("anushka", sharedTokenValue)
+//                    intent = Intent(this, DisplayActivity::class.java)
+//                    intent.putExtras(bundle)
+//                    startActivity(intent)
                 },
                 Response.ErrorListener {
                     text.text = "That didn't work!"
@@ -63,4 +73,3 @@ class RegisterActivity : AppCompatActivity() {
 
 
     }
-}

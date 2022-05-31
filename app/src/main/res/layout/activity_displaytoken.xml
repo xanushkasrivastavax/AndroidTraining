@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".displaytoken">
+    tools:context=".DisplayActivity">
 
     <Button
         android:id="@+id/button"
@@ -19,16 +19,11 @@
         app:layout_constraintVertical_bias="0.023" />
 
     <TextView
-        android:id="@+id/responsetoken"
-        android:layout_width="411dp"
-        android:layout_height="38dp"
-        android:text=" Response :"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/button"
-        app:layout_constraintHorizontal_bias="0.047"
-        app:layout_constraintStart_toStartOf="@+id/button"
-        app:layout_constraintTop_toBottomOf="@+id/button"
-        app:layout_constraintVertical_bias="0.031" />
+        android:id="@+id/getResponse"
+        android:layout_width="414dp"
+        android:layout_height="161dp"
+        android:hint="apiresponse"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="114dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
