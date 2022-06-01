@@ -45,14 +45,7 @@ class RegisterActivity : AppCompatActivity() {
                     val sharedTokenValue = sharedPreferences.getString("access-token",token)
                     Toast.makeText(this,sharedTokenValue , Toast.LENGTH_LONG).show()
 
-//                    text.text=token
-//                    Toast.makeText(this, response, Toast.LENGTH_LONG).show()
-//                    val bundle = Bundle()
-//
-//                    bundle.putString("anushka", sharedTokenValue)
-//                    intent = Intent(this, DisplayActivity::class.java)
-//                    intent.putExtras(bundle)
-//                    startActivity(intent)
+
                 },
                 Response.ErrorListener {
                     text.text = "That didn't work!"

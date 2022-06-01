@@ -49,7 +49,6 @@ class DisplayActivity : AppCompatActivity() {
             val stringRequest: StringRequest = object : StringRequest(
                 Request.Method.POST, url,
                 Response.Listener { response ->
-//                    text.text = "${response.substring(0, 5)}"
                     Toast.makeText(this,"Your token will be refreshed when there will be less than 5 minutes left",Toast.LENGTH_SHORT).show()
                     val jsonObject = JSONObject(response)
                     val token = jsonObject.getString("access_token")
