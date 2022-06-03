@@ -18,22 +18,21 @@ class RegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
-        val login=findViewById<TextView>(R.id.textView4)
-        login.setOnClickListener {
+        val redirectToRegister=findViewById<TextView>(R.id.signup_redirect)
+        redirectToRegister.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
-        val btn=findViewById<Button>(R.id.btn_signin)
-        val text = findViewById<TextView>(R.id.logo)
-        btn.setOnClickListener { _ ->
+        val btnLogin=findViewById<Button>(R.id.btn_signin)
+        val displayMessage = findViewById<TextView>(R.id.first_header)
+        btnLogin.setOnClickListener { _ ->
             val queue = Volley.newRequestQueue(this)
             val url = "https://api-smartflo.tatateleservices.com/v1/auth/login"
-            val email = findViewById<EditText>(R.id.inputName)
-            val password = findViewById<EditText>(R.id.inputEmail)
+            val email = findViewById<EditText>(R.id.inputEmailLogin)
+            val password = findViewById<EditText>(R.id.inputPasswordLogin)
             val stringRequest: StringRequest = object : StringRequest(
                 Request.Method.POST, url,
                 Response.Listener { response ->
-//                    text.text = "${response.substring(0, 5)}"
 
                     val jsonObject = JSONObject(response)
                     val token = jsonObject.getString("access_token")
@@ -41,17 +40,16 @@ class RegisterActivity : AppCompatActivity() {
                     val myEdit = sharedPreferences.edit()
                     myEdit.putString("access-token", token)
                     myEdit.apply()
-                    myEdit.commit()
                     val sharedTokenValue = sharedPreferences.getString("access-token",token)
                     Toast.makeText(this,sharedTokenValue , Toast.LENGTH_LONG).show()
 
 
                 },
                 Response.ErrorListener {
-                    text.text = "That didn't work!"
+                    displayMessage.text = "That didn't work!"
                 }) {
 
-                        override fun getParams(): MutableMap<String, String> {
+                override fun getParams(): MutableMap<String, String> {
                     val params = HashMap<String, String>()
                     params.put("email", email.getText().toString())
                     params.put("password", password.getText().toString())
