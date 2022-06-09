@@ -53,6 +53,7 @@ class DisplayActivity : AppCompatActivity() {
                 val myEdit = sharedPreferences.edit()
                 myEdit.putString("access-token", refreshToken)
                 myEdit.apply()
+                myEdit.commit()
 
 
             },

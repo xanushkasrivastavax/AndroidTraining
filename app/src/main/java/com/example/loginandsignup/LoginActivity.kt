@@ -12,11 +12,9 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
         val redirectLogin = findViewById<TextView>(R.id.signin_redirect)
         redirectLogin.setOnClickListener {
-           val intent=Intent(this,RegisterActivity::class.java)
+            val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         }
-
-
 
 
     }
